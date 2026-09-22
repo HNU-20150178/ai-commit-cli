@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { program } from 'commander';
 import { getStagedDiff, getStagedFiles } from '../src/git.js';
+import { generateCommitMessage } from '../src/ai.js';
 
 program
   .name('aic')
@@ -22,8 +23,12 @@ program
 
       const diff = await getStagedDiff();
       console.log('\ngit diff 요약:');
-      console.log(diff.substring(0, 300) + (diff.length > 300 ? '\n...' : ''));
+      const commitMessage = await generateCommitMessage(diff);
 
+      console.log('\n✨  생성된 커밋 메시지:');
+      console.log('--------------------------------------------------');
+      console.log(commitMessage);
+      console.log('--------------------------------------------------');
     } catch (error) {
       console.error('오류:', error.message);
     }

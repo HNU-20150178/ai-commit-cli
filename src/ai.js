@@ -5,7 +5,7 @@ import 'dotenv/config';
 const apiKey = process.env.GEMINI_API_KEY;
 
 if (!apiKey) {
-  console.error('❌  GEMINI_API_KEY가 .env 파일에 설정되어 있지 않습니다.');
+  console.error('API 키가 .env 파일에 설정되어 있지 않습니다.');
   process.exit(1);
 }
 
@@ -27,7 +27,7 @@ Analyze the provided git diff and generate a clear, concise Git commit message f
    - test: Adding missing tests or correcting existing tests
    - chore: Changes to the build process or auxiliary tools and libraries
 3. The subject line must be written in English or Korean (prefer concise Korean if diff suggests Korean dev context, otherwise English).
-4. Keep the title under 70 characters.
+4. Keep the title under 80 characters.
 5. Output ONLY the raw commit message (no code block formatting, no markdown, no explanation).
 `;
 
