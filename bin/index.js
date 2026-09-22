@@ -25,7 +25,7 @@ program
       console.log('\ngit diff 요약:');
       const commitMessage = await generateCommitMessage(diff);
 
-      console.log('\n✨  생성된 커밋 메시지:');
+      console.log('\n생성된 커밋 메시지:');
       console.log('--------------------------------------------------');
       console.log(commitMessage);
       console.log('--------------------------------------------------');

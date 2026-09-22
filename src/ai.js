@@ -8,9 +8,10 @@ if (!apiKey) {
   console.error('API 키가 .env 파일에 설정되어 있지 않습니다.');
   process.exit(1);
 }
-
+// AI 클라이언트 초기화
 const ai = new GoogleGenAI({ apiKey });
 
+// 프롬프트 작성
 const SYSTEM_PROMPT = `
 You are an expert developer assistant specialized in writing Git commit messages.
 Analyze the provided git diff and generate a clear, concise Git commit message following the Conventional Commits specification.
@@ -28,7 +29,7 @@ Analyze the provided git diff and generate a clear, concise Git commit message f
    - chore: Changes to the build process or auxiliary tools and libraries
 3. The subject line must be written in English or Korean (prefer concise Korean if diff suggests Korean dev context, otherwise English).
 4. Keep the title under 80 characters.
-5. Output ONLY the raw commit message (no code block formatting, no markdown, no explanation).
+5. Output ONLY the raw commit message (no code block formatting, no markdown, no explanation, no emoji).
 `;
 
 /**
@@ -42,7 +43,7 @@ export async function generateCommitMessage(diff) {
     const truncatedDiff = diff.length > 3000 ? diff.substring(0, 3000) + '\n... (truncated)' : diff;
 
     const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
+      model: 'gemini-3.6-flash',
       contents: [
         { role: 'user', parts: [{ text: `${SYSTEM_PROMPT}\n\nHere is the git diff:\n${truncatedDiff}` }] }
       ],
