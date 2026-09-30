@@ -1,6 +1,11 @@
 // src/ai.js
 import { GoogleGenAI } from '@google/genai';
-import 'dotenv/config';
+import dotenv from 'dotenv';
+import path from 'path';
+import os from 'os';
+
+dotenv.config({ quiet: true });
+dotenv.config({ path: path.join(os.homedir(), '.env'), quiet: true });
 
 const apiKey = process.env.GEMINI_API_KEY;
 
