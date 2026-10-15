@@ -17,6 +17,9 @@ npm install
 
 # 로컬 단축키 등록
 npm link
+
+# 클립보드 텍스트 복사를 위해 clipboardy 추가
+npm install clipboardy
 ```
 
 ### 3. 사용방법

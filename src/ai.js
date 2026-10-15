@@ -3,6 +3,7 @@ import { GoogleGenAI } from '@google/genai';
 import dotenv from 'dotenv';
 import path from 'path';
 import os from 'os';
+import clipboardy from 'clipboardy';
 
 dotenv.config({ quiet: true });
 dotenv.config({ path: path.join(os.homedir(), '.env'), quiet: true });
@@ -55,6 +56,10 @@ export async function generateCommitMessage(diff) {
     });
 
     const commitMessage = response.text ? response.text.trim() : '';
+
+    // 클립보드에 복사
+    await clipboardy.write(commitMessage);
+
     return commitMessage;
   } catch (error) {
     throw new Error(`AI 커밋 메시지 생성 실패: ${error.message}`);
